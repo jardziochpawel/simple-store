@@ -1,0 +1,28 @@
+{% extends "base.html.twig" %}
+
+{% block title %} Success{% endblock %}
+
+{% block body %}
+    <div class="w-100" style="padding: 15px; display: flex; flex-flow: row; justify-content: flex-end;">
+        <a href="/logout">
+            <button class="btn btn-outline-success">Logut</button>
+        </a>
+    </div>
+    <div class="container">
+        <div class="alert alert-success" role="alert">
+            Huray new product added! :)
+        </div>
+        <div>
+            <a href="/admin/new-product">
+                <button class="btn btn-primary">
+                    Add another product
+                </button>
+            </a>
+            <a href="/">
+                <button class="btn btn-info">
+                    Back to list
+                </button>
+            </a>
+        </div>
+    </div>
+{% endblock %}

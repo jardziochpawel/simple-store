@@ -1,0 +1,14 @@
+{% extends "base.html.twig" %}
+
+{% block title %} Create new product{% endblock %}
+
+{% block body %}
+    <div class="w-100" style="padding: 15px; display: flex; flex-flow: row; justify-content: flex-end;">
+        <a href="/logout">
+            <button class="btn btn-outline-success">Logut</button>
+        </a>
+    </div>
+    <div class="container">
+        {{ form(form) }}
+    </div>
+{% endblock %}

@@ -1,0 +1,53 @@
+{% extends 'base.html.twig' %}
+{% block title %}Products list{% endblock %}
+
+{% block body %}
+<div class="w-100" style="padding: 15px; display: flex; flex-flow: row; justify-content: flex-end;">
+    {% if is_granted('IS_AUTHENTICATED_REMEMBERED') %}
+        <a href="/admin">
+            <button class="btn btn-outline-success">Admin Panel</button>
+        </a>
+        <a href="/logout">
+            <button class="btn btn-outline-danger">Logut</button>
+        </a>
+    {% else %}
+        <a href="/login">
+            <button class="btn btn-outline-primary">Login</button>
+        </a>
+    {% endif %}
+</div>
+<div class="container">
+    <div class="count">
+        {{ pagination.getTotalItemCount }}
+    </div>
+    <table class="table table-striped">
+        <tr class="row">
+            {# sorting of properties based on query components #}
+            <th class="col">{{ knp_pagination_sortable(pagination, 'Id', 'p.id') }}</th>
+            <th class="col" {% if pagination.isSorted('p.name') %} class="sorted"{% endif %}>
+                {{ knp_pagination_sortable(pagination, 'Name', 'p.name') }}
+            </th>
+            <th  class="col" {% if pagination.isSorted('p.description') %} class="sorted"{% endif %}>
+                {{ knp_pagination_sortable(pagination, 'Description', 'p.description') }}
+            </th>
+            <th class="col" {% if pagination.isSorted('p.price') %} class="sorted"{% endif %}>
+                {{ knp_pagination_sortable(pagination, 'Price', 'p.price') }}
+            </th>
+        </tr>
+
+        {# table body #}
+        {% for prduct in pagination %}
+            <tr class="row">
+                <td class="col">{{ prduct.id }}</td>
+                <td class="col">{{ prduct.name }}</td>
+                <td class="col">{{ prduct.description }}</td>
+                <td class="col">{{ prduct.price }} {{ currency }}</td>
+            </tr>
+        {% endfor %}
+    </table>
+    {# display navigation #}
+    <div class="navigation">
+        {{ knp_pagination_render(pagination) }}
+    </div>
+</div>
+{% endblock %}
